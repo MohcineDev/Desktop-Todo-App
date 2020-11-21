@@ -1,0 +1,16 @@
+{
+  "name": "todo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "keywords": [],
+  "author": "MouhcineDev",
+  "license": "ISC",
+  "dependencies": {
+    "electron": "^10.1.4",
+    "jsstore": "^3.10.4"
+  }
+}

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo</title>
+
+    <style>
+        h3{
+            font-family: arial;
+            margin: 10px 30px 30px;
+            color: rgb(121, 121, 121);
+        }
+        input[type='submit'],
+        input[type='text'] {
+            border: 1px solid #313131;
+            outline: none;
+            border-radius: 4px;
+
+        }
+
+        input[type='submit'] {
+            cursor: pointer;
+            margin: 0 5px;
+            background: #f0fafb;
+            padding: 5px 10px;
+        }
+
+        input[type='text'] {
+            padding: 5px 0 5px 5px;
+        }
+
+        div svg {
+            width: 30px;
+            height: 30px;
+            position: absolute;
+            top: 10px;
+            right: 5px;
+            cursor: pointer;
+        }
+
+        div svg:hover .cls-1 {
+            fill: #69aa43;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h3>Add ToDo</h3>
+    <div>
+        <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50">
+            <defs>
+                <style>
+                    .cls-1 {
+                        fill: #84c75d;
+                    }
+
+                    .cls-2 {
+                        fill: #fff;
+                    }
+                </style>
+            </defs>
+            <title>Close</title>
+            <path class="cls-1" d="M50,25A25,25,0,1,1,25,0,25,25,0,0,1,50,25Z" />
+            <path class="cls-2"
+                d="M37.83,21.05c2-.49,2-2,2-2H34.87A12.67,12.67,0,0,0,25,15.13a12.67,12.67,0,0,0-9.87,3.95H10.19s0,1.48,2,2a11.84,11.84,0,0,0-1.11,1.87A7.49,7.49,0,0,0,10.19,26,6.61,6.61,0,0,0,17.1,32.9a8,8,0,0,0,5.92-3l2,3,2-3a8,8,0,0,0,5.93,3A6.61,6.61,0,0,0,39.81,26a7.25,7.25,0,0,0-.8-2.93A13.18,13.18,0,0,0,37.83,21.05ZM17.1,30.92a4.94,4.94,0,0,1,0-9.87,5,5,0,0,1,2.15.5,4.93,4.93,0,0,1-2.15,9.37ZM25,29a11.21,11.21,0,0,0-3.17-7.58,6.87,6.87,0,0,0-4.73-2.29,12,12,0,0,1,15.8,0,6.87,6.87,0,0,0-4.75,2.31A11.21,11.21,0,0,0,25,29Zm7.9,2a4.94,4.94,0,0,1,0-9.87A4.95,4.95,0,0,1,37.83,26,4.93,4.93,0,0,1,32.9,30.92Z" />
+            <path class="cls-2" d="M32.9,25a1,1,0,1,0,1,1A1,1,0,0,0,32.9,25Z" />
+            <path class="cls-2" d="M32.9,23a3,3,0,1,0,3,3A3,3,0,0,0,32.9,23Zm0,4.93a2,2,0,1,1,2-2A2,2,0,0,1,32.9,28Z" />
+            <path class="cls-2" d="M17.1,25a1,1,0,1,0,1,1A1,1,0,0,0,17.1,25Z" />
+            <path class="cls-2" d="M17.1,23a3,3,0,1,0,3,3A3,3,0,0,0,17.1,23Zm0,4.93a2,2,0,1,1,2-2A2,2,0,0,1,17.1,28Z" />
+        </svg>
+    </div>
+
+    <form onSubmit="">
+        <input type="text" autofocus name="" id="todo">
+        <input type="submit" value="Add Todo">
+    </form>
+
+
+
+    <script>
+        const { ipcRenderer } = require('electron')
+
+        document.querySelector('form').addEventListener('submit', (e) => {
+            e.preventDefault()
+            ipcRenderer.send('sendTodo', document.querySelector('#todo').value)
+            document.querySelector('#todo').value = ''
+        })
+
+        document.querySelector('svg').addEventListener('click', ()=>{
+            ipcRenderer.send('close-pop')
+        })
+    </script>
+</body>
+
+</html>
